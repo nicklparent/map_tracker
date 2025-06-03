@@ -1,11 +1,48 @@
 'use client';
 import React, { useState } from 'react';
 import '@/ui/css/login.css';
+import { useRouter } from 'next/router';
 
-export default function Login(){
+export default function LoginPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState("");
+    const router = useRouter();
+    
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError("");
 
+        try {
+            const res = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({email, password})
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error);
+            }
+            
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", data.user);
+
+
+            router.push("/");
+        } catch (err) {
+            setError(err instanceof Error ? err.message: "unknown Error has occured")
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    
     return (
         <div className='login'>
             <form className='flex justify-center *:m-2'>
