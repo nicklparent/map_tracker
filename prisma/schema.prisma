@@ -16,7 +16,7 @@ datasource db {
 
 model User {
   id        String    @id @default(uuid())
-  role      String    @default("player")
+  role      Role      @default(Player)
   email     String    @unique
   password  String
   createdAt DateTime  @default(now())
@@ -40,3 +40,7 @@ model Session {
   createdAt DateTime @default(now())
 }
 
+enum Role {
+  DungeonMaster
+  Player
+}
