@@ -1,0 +1,15 @@
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 8px solid #f3f3f3; /* Light grey background */
+    border-top: 8px solid black; /* Black spinner */
+    border-radius: 50%; /* Make it a circle */
+    margin: 2rem;
+    animation: spinning 2.5s linear infinite;
+}
+
+@keyframes spinning {
+    to {
+        transform: rotate(360deg);
+    }
+}

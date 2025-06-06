@@ -6,11 +6,17 @@
     align-items: center;
 }
 
+.login form {
+    background-color: #7d1c00;
+    padding: 4rem;
+    border: 1px solid black;
+    border-radius: .675rem;
+}
+
 .input-field {
-    margin: 1em 0 1em 0;
-    max-width: 190px;
-    position: relative;
-    border-radius: 0.8rem;
+    margin: 0 0 0.5em 0;
+    border-radius: 0.65rem;
+    border: 2px solid black;
 }
 
 .input-field input {
@@ -18,25 +24,5 @@
     outline: none;
     background-color: transparent;
     width: 100%;
-}
-
-.input-field label {
-    position: relative;
-    left: 0;
-    padding: 0.8em;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    color: rgb(100, 100, 100);
-}
-
-.input-field :is(input:focus, input:valid)~label {
-    transform: translateY(-50%) scale(0.9);
-    margin: 0em;
-    margin-left: 1.3em;
-    padding: 0.4em;
-    background-color: #e8e8e8;
-}
-
-.input-field label:hover {
-    transform: translateY(-50%) scale(0.9);
+    border: none;
 }
