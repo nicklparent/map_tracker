@@ -7,7 +7,7 @@
 }
 
 .login form {
-    background-color: #7d1c00;
+    background-color: #8a331a;
     padding: 4rem;
     border: 1px solid black;
     border-radius: .675rem;
@@ -22,7 +22,14 @@
 .input-field input {
     padding: 0.8em;
     outline: none;
-    background-color: transparent;
     width: 100%;
     border: none;
+    font-size: 1.1rem;
+    border-radius: 0.65rem;
+    background-color: #f0eef8;
+}
+
+.login-btn {
+    width: 60%;
+    padding: 1rem;
 }
