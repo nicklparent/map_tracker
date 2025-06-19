@@ -3,7 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { signJwt, verifyJwt } from "@/lib/jwt";
 import { JwtPayload } from "@/types";
+import { updateLoginCookie } from "@/lib/cookies";
 
+
+// Gets the currently logged in user from the database using the id in the cookie
 export async function GET(req:NextRequest) {
     try {
         const token = req.cookies.get("token")?.value;
@@ -19,14 +22,25 @@ export async function GET(req:NextRequest) {
             select: {
                 id: true,
                 email: true,
+                role: true,
+                sessions: true,
             }
-        })
+        });
+
+        if (!user){
+            return NextResponse.json({error: "User not found in database"}, {status: 401});
+        }
+
+        updateLoginCookie();
+        return NextResponse.json({user}, {status: 200});
+
     } catch(err){
         return NextResponse.json({error: "Authentication Failed"}, {status: 401});
     }
 }
 
 
+// Handles any of the login attempts through post
 export async function POST(req: NextRequest){
     const {email, password} = await req.json();
 
